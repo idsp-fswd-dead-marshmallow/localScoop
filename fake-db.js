@@ -35,7 +35,7 @@ const shopInfo = {
     email: "HayesStudio@gmail.com",
     password: "hahayes",
     address: "2310 Main street,Vancouver BC,Canada",
-    product: "Handmade Goods",
+    productCategory: "Handmade Goods",
     delivery: true,
     pickUp: true,
     kmRadius: 20,
@@ -50,7 +50,7 @@ const shopInfo = {
     email: "lesbasics@gmail.com",
     password: "lesbasics",
     address: "4521 fraser street,Vancouver BC,Canada",
-    product: "fashion",
+    productCategory: "fashion",
     delivery: true,
     pickUp: true,
     kmRadius: 20,
@@ -65,7 +65,7 @@ const shopInfo = {
     email: "sagejewelss@gmail.com",
     password: "sagejewels",
     address: "2410 pender street,Vancouver BC,Canada",
-    product: "Handmade Goods",
+    productCategory: "Handmade Goods",
     delivery: false,
     pickUp: true,
     kmRadius: 30,
@@ -165,14 +165,16 @@ function getUserByUsername(username) {
 }
 
 function addUser(username, password) {
-  let userId = Math.max(...Object.keys(users).map(Number)) + 1;
+  
+  // get the next userId in sequence, userIds are reused if previous user d
+  let storeId = Math.max(...Object.keys(store).map(Number)) + 1;
   let user = {
     userId,
     username,
     password,
   };
-  users[userId] = user;
-  return user;
+  
+  return 
 }
 
 
@@ -249,9 +251,7 @@ function deleteProduct(productId) {
   delete products[productId];
 }
 
-
 /**
- * 
  * @param {number} storeID 
  * @returns {string} profilePhotoFileName. undefined if no shop with given storeID exists
  */
@@ -260,16 +260,32 @@ function getShopProfilePhotoFilename(givenStoreID) {
   if(typeof(givenStoreID) !== 'number' && givenStoreID > 0){
     return;
   }
-  
   let shop = shopInfo[givenStoreID];
 
   // no shop exists with the given ID
   if(shop == undefined){
     return;
   }
-
   return shop.shopProfilePhoto;
 }
+
+/**
+ * @param {object} storeInfoObj 
+ * @returns {}
+ * Object with store info that will be written into the 
+ * shopInfo {} inside fake-db.js.
+ * storeId, storeName, phoneNum, email, password, address, 
+ * productCategory,
+ * delivery, pickUp, kmRadius, rating, shopProfilePhoto
+ */
+function writeShopIntoDatabase(storeInfoObj){
+  // the next userId in sequence
+  let userId = Math.max(...Object.keys(shopInfo).map(Number)) + 1;
+  
+  
+}
+
+
 
 
 function getCategory() {
@@ -310,6 +326,7 @@ module.exports = {
   editProduct,
   deleteProduct,
   getCategory,
-  getShopProfilePhotoFilename
+  getShopProfilePhotoFilename,
+  writeShopIntoDatabase
 };
 
