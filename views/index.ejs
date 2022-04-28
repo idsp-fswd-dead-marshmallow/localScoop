@@ -5,14 +5,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index.ejs</title>
-  
+
+    <title>Welcome to LocalScoop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #EEC195;
+        }
+
+        #logo {
+            opacity: 1.0;
+            max-width: 350px;
+            max-height: 350px;
+
+        }
+
+        img {
+            max-width: 300px;
+            max-height: 300px;
+        }
+
+        .containerForCentering {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+    </style>
 </head>
 
 <body>
-    <img src="/uploads/aa.jpeg">
-    <h1> Behold, Sentient Steak </h1>
-    <img src="/uploads//uploads/aa.jpeg" alt="">
+    <div class="containerForCentering">
+        <img src="/localScoopMedia/localscooplogo.png" alt="localscooplogo">
+        <button class="yellow-bn s-bn">For Business</button>
+        <button class="yellow-bn s-bn">For Customers</button>
+    </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script>
+    let finishUpButton = document.body.querySelector(".yellow-bn");
+
+    finishUpButton.onclick = function () {
+        location.href = "/shop_setUp/shop_setUp_5";
+    } 
+</script>
+
 </html>
