@@ -269,6 +269,22 @@ function getShopProfilePhotoFilename(givenStoreID) {
   return shop.shopProfilePhoto;
 }
 
+
+let storeObj = {
+  storeName: "The Hash Table",
+  phoneNum: "778-789-4322",
+  email: "hashbrownsandtables@breakfast.com",
+  password: "123",
+  address: "3333 ",
+  productCategory: "Handmade Goods",
+  delivery: true,
+  pickUp: false,
+  kmRadius: 20,
+  rating: 4.5,
+  shopProfilePhoto: "uploads/28b0882d388326d25a2e45c29443fefb.jpeg"
+}
+
+
 /**
  * @param {object} storeInfoObj 
  * @returns {}
@@ -282,10 +298,12 @@ function writeShopIntoDatabase(storeInfoObj){
   // the next userId in sequence
   let userId = Math.max(...Object.keys(shopInfo).map(Number)) + 1;
   
-  
+  for(objIndex in shopInfo){
+    console.log(shopInfo[objIndex])
+  }
 }
 
-
+writeShopIntoDatabase()
 
 
 function getCategory() {
