@@ -17,12 +17,11 @@ router.get("/orders_1", (req, res) => {
 
     let carouselSliderData = [
         { updateTime : 'Yesterday', productName : 'Nike Sage Lows', productPrice : '$125' },
-        { updateTime : '2 Days Ago', productName : 'White Luxury Hoodie', productPrice : '$105' },
+        { updateTime : '2 Days Ago', productName : 'Red Luxury Hoodie', productPrice : '$105' },
         { updateTime : '3 Days Ago', productName : 'Nike Air Force One-Blue', productPrice : '$175' },
         { updateTime : '3 Days Ago', productName : 'Nike Lebron Air 1', productPrice : '$130' },
         { updateTime : '5 Days Ago', productName : 'Herschel White Backpack', productPrice : '$125' },
         { updateTime : 'Last Week', productName : 'Baseball Cap', productPrice : '$105' },
-        { updateTime : 'Yesterday', productName : 'Premium Foot Pics', productPrice : '$125' },
     ]
 
     let numberOfCards = carouselSliderData.length
