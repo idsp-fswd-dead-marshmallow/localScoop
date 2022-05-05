@@ -5,36 +5,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"> -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="../../styles.css">
-
-  <title>Node File Uploads</title>
+  <title>shop set up - upload image</title>
 </head>
 
 <body>
+  <!-- for image upload -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <style>
-    img {
-      max-width: 600px;
-    }
-  </style>
 
+
+  <!-- back button -->
   <div class="shop-setup-header">
-    <a href="/shop_setUp/shop_setUp_5" class="returnArrow">
-      <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink">
-        <rect width="37" height="37" fill="url(#pattern0)" />
-        <defs>
-          <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-            <use xlink:href="#image0_146_7727" transform="scale(0.01)" />
-          </pattern>
-          <image id="image0_146_7727" width="100" height="100"
-            xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAABY0lEQVR4nO3cPUpjURzG4dcBLWbikkTL6ccVuBJ34Ea0FSsLP9YzzVSjoEUSsAhRr9fcF+7zwCFNLvzJjwM3cDgJAAAAAAAAAACjWCS5WH0ysZ9JbpO8JHlMcjjtOPP2NsZ6iTKRTTFEmcgiyV02x1iv68mmm5ltO2O9/iU5nmrAORGjiBhFxCgiRhExiohRRIwiYhQRo4gYRcQoIkYRMYqIUUSMImIUEaOIGEXEGNHeF59fZHng4GjLd56TnGV5WmRu/q7WTvzK+6dD5r7OP/uj/vjsAysHSS6zfWcwwJAg+0mukvweeRYyfIfwTYYEeUryJ8nNyLOQ4Tvkf5LTJPcjzkK89n63nb72rn30j+HJrgebM1EKiVJIlEKiFBKlkCiFRCkkSiFRColSSJRCohQSpZAohUQpJEohUQqJUkiUQi4wK7RtpzzEFX+T2BRFjIm9jSJGCRcpAwAAAAAAAAC0eQUp0+wlmfscKgAAAABJRU5ErkJggg==" />
-        </defs>
-      </svg>
-    </a>
+    <a onclick="history.back()"><span class="material-icons back-icon">arrow_back</span></a>
   </div>
 
   <div class="centerBox m-font">
@@ -44,32 +30,24 @@
       what your store has to offer.
     </P>
 
-    <div class="container">
-      <img src="<%= typeof file != 'undefined' ? file : '' %>" class="responsive-img"
-        style="max-width: 70%; margin-top: 10px;">
-      
-        <form action="shop_setup/upload" method="POST" enctype="multipart/form-data">
+
+
+    <div class="container centerBox m-font">
+      <img
+        src="<%= typeof file != 'undefined' ? file : 'https://majobacooks.com/wp-content/uploads/2021/03/pngkey.com-ega-png-2332677.png' %>"
+        class="responsive-img" style="max-width: 70%; margin-top: 10px; border-radius: 10%;">
+
+      <form action="/shop_setup/upload" method="POST" enctype="multipart/form-data" id="photoForm">
         <div class="file-field input-field">
-          <div class="">
-            <span>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 12H8M12 8V12V8ZM12 12V16V12ZM12 12H16H12Z" stroke="black" stroke-width="2"
-                  stroke-linecap="round" />
-                <path
-                  d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                  stroke="black" stroke-width="2" />
-              </svg>
-            </span>
-            <input name="myImage" type="file" accept="image/*">
-          </div>
-          <%= typeof msg !='undefined' ? msg : '' %>
-            <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
-            </div>
+          <label for="file-upload" class="greenBtn">
+            Upload Image
+          </label>
+          <input id="file-upload" type="file" accept="image/*" name="myImage" onchange="uploadphoto()" />
         </div>
-        <button type="submit" class="btn">Upload</button>
+
+        <!-- <button type="submit" class="btn">Upload</button> -->
       </form>
-      
+
     </div>
 
     <a href="/shop_setup/shop_setup_7">
@@ -82,4 +60,14 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script>
+
+  function uploadphoto() {
+    let fileUpload = document.getElementById("file-upload").value
+    if (fileUpload) {
+      document.getElementById("photoForm").submit();
+    }
+  }
+</script>
+
 </html>

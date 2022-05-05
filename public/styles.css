@@ -1,122 +1,89 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Fraunces:ital,wght@1,200&family=Playfair+Display:ital,wght@1,500&family=Poppins:wght@100;200;300;400;500;600&display=swap');
 
 
-body{
-    background-color: #F7F5F3;
+body {
+    background-color: #F7F7F3;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    margin:0;
+}
+
+.fontFamily {
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
 }
 
-.fontFamily{
-    font-family: 'Poppins', sans-serif;
-    font-weight: 300;
-}
 
-.shop-setup-header{
-    padding-top: 10%;
-    margin:4% 5% 2% 5%
-}
-
-.centerBox{
+.centerBox {
     text-align: center;
-
 }
+
+
+
 /* .container{
     text-align: center;
 } */
 
-.shopReady{
-    font-weight: 400;
+/* for centering item ,should put it in the parent class list */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
-.yellow-bn{
-    border:solid 2px;
+.greenBtn {
+    background-color: #26a69a;
+    color: white;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    margin: 10px;
+    text-align: center;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.yellow-bn {
+    border: solid 2px;
     border-radius: 15px;
-    background-color: #E3974F;  
-    color:white ;
+    background-color: #E3974F;
+    color: white;
     font-size: 18px;
     width: 355px;
-    height:55px;
+    height: 55px;
     margin-top: 40px;
-
 }
 
-.l-bn{
+.l-bn {
     width: 286px;
-    height:52px ;
+    height: 52px;
 }
 
-.m-bn{
+.m-bn {
 
     width: 250px;
-    height:48px ;
-}
-
-.s-bn{
-    width: 184px;
-    height:45px ;
-
-}
-.xs-bn{
-    width: 150px;
-    height:38px ;
-    border-radius: 10px;
-}
-
-
-
-/*Yasmina*/
-
-.btn-white{
-    border:solid 2px;
-    border-radius: 5px;
-    background-color: white;
-    /*color:white ;*/
-    font-size: 18px;
-    width: 355px;
-    height:55px;
-    margin-top: 15px;
-}
-
-.form-box{
-
-    margin: 15% 0%;
-    font-size:20px;
-    padding: 3% 5%;
-}
-
-
-.address-box{
-
-    margin: 40% 0%;
-    font-size:20px;
-    padding: 3% 5%;
-    text-align: center;
-
-}
-
-.product-box{
-
-    margin: 30% 0;
-    font-size:20px;
-    padding: 3% 6%;
-    text-align: center;
-
-}
-
-
-
-.form-control {
     height: 48px;
-    width: 335px;
-    border-color: black;
+}
+
+.s-bn {
+    width: 184px;
+    height: 45px;
+
+}
+
+.xs-bn {
+    width: 150px;
+    height: 38px;
+    border-radius: 10px;
+    margin: 10px 5px;
 }
 
 .xl-font{
     font-size:30px ;
 }
+
 
 .l-font{
     font-size:24px ;
@@ -134,125 +101,408 @@ body{
     font-size:16px ;
 }
 
+
+
+
+/*=====SHOP SETUP======*/
+
+.shop-setup-header {
+    padding-top: 10%;
+    margin: 4% 5% 2% 5%
+}
+
+/*shop_setup_4*/
+.btn-white{
+    border:solid 2px;
+    border-radius: 5px;
+    background-color: white;
+    /*color:white ;*/
+    font-size: 18px;
+    width: 355px;
+    height: 55px;
+    margin-top: 15px;
+}
+
+.form-box {
+
+    margin: 15% 0%;
+    font-size: 20px;
+    padding: 3% 5%;
+}
+
+
+.address-box {
+
+    margin: 40% 0%;
+    font-size: 20px;
+    padding: 3% 5%;
+    text-align: center;
+
+}
+
+.product-box {
+
+    margin: 30% 0;
+    font-size: 20px;
+    padding: 3% 6%;
+    text-align: center;
+
+}
+
+.form-control {
+    height: 48px;
+    width: 335px;
+    border-color: black;
+}
+
+
+/*shop_setup_5*/
 .delivery_pickUp{
- 
     /* height: 10em; */
     display: flex;
     align-items: center;
     justify-content: center;
-    gap:10px;
+    gap: 10px;
     /* background-color: white; */
     margin-top: 40px;
     margin-bottom: 40px;
-} 
+}
 
 
- .deliveryBtn{
-    border:solid black 1px;
-    width:160px;
+.deliveryBtn {
+    border: solid black 1px;
+    width: 160px;
     height: 189px;
     background-color: white;
     font-size: 20px;
     font-weight: 300;
-  
-} 
 
-/* .pickUp{
-    border:solid black 1px;
-    width:160px;
-    height: 189px;
-    background-color: white;
-    float: right;
-}  */
+}
 
-#deliveryDistance{
+
+#deliveryDistance {
     background-color: white;
     border-radius: 5px;
     width: 200px;
     height: 40px;
-
     margin: 10px;
-
 }
 
 
+/*shop_setup_7*/
+.shopReady {
+    font-weight: 400;
+}
 
-/*Components*/
+/* the background will be changed after click the button */
+.clicked{
+    background-color: #C3D99D;
+    /*background-color: red;*/
+}
 
-/*footer*/
 
-.mobile-nav {
-    background: antiquewhite;
+/*=====FOOTER/ HEADER======*/
+
+.nav {
     position: fixed;
     bottom: 0;
-    height: 10%;
     width: 100%;
+    /*height: 55px;*/
+    height: 10%;
+    box-shadow: 2px -10px 10px -4px rgba(0, 0, 0, 0.30);
+    background-color: #F7F7F3;
+    overflow-x: auto;
     display: flex;
-    justify-content: space-around;
-    /*box-shadow: 0 -8px 8px -4px rgba(0 0 0 2);*/
-
-}
-
-.bloc-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.bloc-icon img {
-    /*width: 30px;*/
-}
-
-.fa-solid{
-    width:20px;
-    height:auto;
-
-    font-size: 20px;
-    font-weight: 300;
-}
-
-/* .saveBtn:hover{
-    background-color: #D4E6B5;
-    color: white;
-    
-} */
-
-/* .saveBtn:active {
-  background-color:wheat;
-  
-  transform: translateY(4px);
-} */
-
-
-
-.clicked{
-    background-color: #D4E6B5;
-    /*color: #E3974F;*/
-
-}
-
- .logoImage{
-    max-width: 60%;
 }
 
 
-.homebox{
+.nav-link {
     display: flex;
     flex-direction: column;
-    position:absolute;
     align-items: center;
-    top:20%;
-  
+    justify-content: center;
+    flex-grow: 1;
+    min-width: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 14px;
+    color: #444;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.1s ease-in-out;
+    text-decoration: none;
 }
 
-.homebox button{
-    font-family: 'Poppins', sans-serif;
-    font-weight: 300;
+
+.nav-link, .nav-link:hover, .nav-link:focus, .nav-link:active {
+    text-decoration: none;
 }
 
-.responsive-img{
-    max-width: 70%;
-    margin-top: 10px;
+.link-active, .nav-link:active, nav a:active {
+    color: #009578;
 }
+
+
+.nav-icon {
+    font-size: 30px;
+    margin: 0 10px;
+}
+
+.nav-icon.seller-shop{
+    font-size: 25px;
+    margin: 0 10px;
+    color: #383b3c;
+}
+
+.back-icon{
+    font-size: 35px;
+}
+
+
+.homebox {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    align-items: center;
+    top: 20%;
+
+}
+
+.nav-text{
+
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase ;
+}
+
+/*header*/
+
+/*Also the seller_landing*/
+.seller-shop-header{
+    padding-top: 5%;
+    margin:2% 5% 2% 5%
+}
+
+.nav-wrapper.seller-shop{
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+}
+
+.nav-wrapper--left.seller-shop{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.nav-wrapper--right.seller-shop{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+/*===== SELLER SHOP======*/
+
+.seller-shop-body{
+    padding-bottom: 100px;
+}
+
+.seller-shop-body * {box-sizing:border-box}
+
+/*Slideshow container*/
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+/* Hide the images by default */
+.mySlides {
+    display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+
+.numbertext {
+    /*color: red;*/
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: #D4E6B5;
+    border-radius: 50px;
+}
+
+
+/* Fading animation */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+/*Description*/
+
+
+.store_info{
+    line-height: 1em;
+    padding: 0 20px;
+}
+
+
+/*Grid*/
+.seller_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-gap: 4px;
+    padding: 0 20px;
+    margin: 5px 0;
+
+}
+
+.seller_grid_item {
+    overflow: hidden;
+    position: relative;
+    background-color: white;
+    width: 100%;
+    height: 8rem; /* vary this to what you need */
+    border-radius: 15px;
+}
+
+
+.seller_grid_image {
+
+    display: block;
+    max-width: 100%;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+
+.carousel_image{
+    width:100%;
+    height:250px;
+}
+
+
+
+/* =======below css is for product posting======= */
+
+/* Product_posting page 2 */
+.productPostImg {
+    margin: 10% auto 5% auto;
+}
+
+.productPost {
+    display: flex;
+    margin: 3% 5% 3% 5%;
+    justify-content: space-between;
+}
+
+
+.imgAndProductInfo img {
+    max-width: 200px;
+    max-height: 200px;
+
+}
+
+.imgAndProductInfo {
+    display: flex;
+}
+
+
+#file-upload{
+    display: none;
+}
+
+hr {
+    margin: auto 5% auto 5%;
+    border-color: rgba(119, 117, 117, 0.803);
+}
+
+.inputborder {
+    border: none;
+    background-color: #F7F7F3;
+    border-color: #F7F7F3;
+    width: 180px;
+    text-align: right;
+    
+}
+
+#description{
+    height: 50px;
+}
+
+/* Product_posting page 2 */
+.productSummary {
+    position: absolute;
+    top: 80px
+}
+
+.productList {
+    position: absolute;
+    top: 330px;
+    margin: 10%;
+    font-size: 20px
+}
+
+.productInfo {
+    margin-left: 5%;
+    margin-top: 20px;
+}
+
+.imgAndProductInfo {
+    position: absolute;
+    top: 400px;
+    margin: 5%;
+}
+
+.displayNone, #radius{
+    display: none;
+}
+
+/* ====== above css is for product posting ========= */
+
 
 

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <title>Sellers landing</title>
+
+    <style>
+        body {
+            position: relative; /* usually the parent, in this case the body element, has position relative so that the absolute positioned child is positioned relative to it */
+            height: 100vh; /* 100% of the viewport height */
+            margin: 0; /* recommended */
+        }
+
+        .comingSoon{
+            position: absolute; /* taken out of the normal flow of the document */
+            top: 50%; /* moved down by 50% of the screen height */
+            transform: translateY(-50%); /* moved back up (Y axis) by half of its height to achieve the perfect center */
+            width: 100%; /* needs to be defined to keep the default block behavior */
+            text-align: center;
+            margin: 0; /* again, for perfect center */
+            opacity: 80%;
+        }
+    </style>
+</head>
+<body>
+<main class="">
+
+    <!--  HEADER-->
+    <header class="seller-shop-header">
+        <!--Back button-->
+        <nav class="nav-wrapper seller-shop">
+            <div class="nav-wrapper--left seller-shop">
+                Home
+            </div>
+            <div class="nav-wrapper--right seller-shop">
+
+                <a href="#"><span class="material-icons nav-icon seller-shop">mode_comment</span></a>
+                <a href="#"><span class="material-icons nav-icon seller-shop">settings</span></a>
+            </div>
+            
+        </nav>
+    </header>
+
+    <span class=" m-font comingSoon">Coming soon:<br>Summary of your shop </span>
+
+
+
+
+    <footer>
+        <%- include('../elements/seller_footer.ejs') %>
+    </footer>
+
+</main>
+
+</body>
+</html>

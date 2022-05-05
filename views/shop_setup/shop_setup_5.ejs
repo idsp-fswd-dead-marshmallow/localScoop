@@ -7,34 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Document</title>
-  <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
 
-  <!-- Yoyo's original local css  -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="../../styles.css">
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
 
-  <!-- link bootstrap to express ejs  -->
-  <!-- <link rel="stylesheet" href="./css/bootstrap.min.css"> -->
-
-
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
   <header class="shop-setup-header">
-    <a href="/shop_setUp/shop_setUp_4" class="returnArrow">
-      <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink">
-        <rect width="37" height="37" fill="url(#pattern0)" />
-        <defs>
-          <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-            <use xlink:href="#image0_146_7727" transform="scale(0.01)" />
-          </pattern>
-          <image id="image0_146_7727" width="100" height="100"
-            xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAABY0lEQVR4nO3cPUpjURzG4dcBLWbikkTL6ccVuBJ34Ea0FSsLP9YzzVSjoEUSsAhRr9fcF+7zwCFNLvzJjwM3cDgJAAAAAAAAAACjWCS5WH0ysZ9JbpO8JHlMcjjtOPP2NsZ6iTKRTTFEmcgiyV02x1iv68mmm5ltO2O9/iU5nmrAORGjiBhFxCgiRhExiohRRIwiYhQRo4gYRcQoIkYRMYqIUUSMImIUEaOIGEXEGNHeF59fZHng4GjLd56TnGV5WmRu/q7WTvzK+6dD5r7OP/uj/vjsAysHSS6zfWcwwJAg+0mukvweeRYyfIfwTYYEeUryJ8nNyLOQ4Tvkf5LTJPcjzkK89n63nb72rn30j+HJrgebM1EKiVJIlEKiFBKlkCiFRCkkSiFRColSSJRCohQSpZAohUQpJEohUQqJUkiUQi4wK7RtpzzEFX+T2BRFjIm9jSJGCRcpAwAAAAAAAAC0eQUp0+wlmfscKgAAAABJRU5ErkJggg==" />
-        </defs>
-      </svg>
-    </a>
+    <a onclick="history.back()"><span class="material-icons back-icon">arrow_back</span></a>
   </header>
 
   <div class="centerBox m-font">
@@ -47,10 +31,11 @@
       <button class="deliveryBtn" value="delivery">Delivery</button>
       <button class="deliveryBtn" value="pickup">Pick up in-store </button>
     </div>
-    <div id="radius" style="display:none">
+    <div id="radius">
       <label for="deliveryDistance">Please choose your KM radius:</label>
       <div class="dropdownMenu">
-        <select name="deliveryDistance" id="deliveryDistance" onchange="selectedRadius()">
+        <!-- <select name="deliveryDistance" id="deliveryDistance" onchange="selectedRadius()"> -->
+        <select name="deliveryDistance" id="deliveryDistance">
           <option value="10">10km</option>
           <option value="20">20km</option>
           <option value="30">30km</option>
@@ -58,104 +43,115 @@
         </select>
       </div>
     </div>
-    <button class="yellow-bn m-bn" onclick="http://localhost:8000/shop_setup/shop_setUp_6">
-      Next
-    </button>
+    <a href="/shop_setup/shop_setup_6">
+    <button type="submit" class="yellow-bn m-bn submitDeliveryMethodBtn">Next</button>
+    </a>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-  </script>
+    </script>
 
   <script>
+    //it turns green when press the delivery button, when press "delivery" button, the radius selection will be showed"
+    let deliveryMethodList = {}
+    let submitDeliveryMethodBtn = document.querySelector(".submitDeliveryMethodBtn")
+    // let deliveryDistanceBtn = document.querySelector("#submitDeliveryMethodBtn")
 
-    console.log("???", document.getElementsByClassName("deliveryBtn"))
-    let deliveryMethodList = []
-
-    let buttonList = document.getElementsByClassName("deliveryBtn")
-    for (var i = 0; i < buttonList.length; i++) {
-      buttonList[i].addEventListener("click", () => {
-        if (buttonList[i].classList.contains("clicked")) {
-          buttonList[i].classList.remove("clicked")
-          let index = deliveryMethodList.indexOf(buttonList[i].value);
-          if (index !== -1) {
-            deliveryMethodList.splice(index, 1);
-
-          }
-          else {
-            typeBtn.classList.add("clicked")
-            deliveryMethodList.push(typeBtn.value)
-            if (deliveryMethodList.includes("delivery")) {
+    document.addEventListener("DOMContentLoaded", () => {
+      let deliveryMethodType = document.querySelectorAll(".deliveryBtn")
+      deliveryMethodType.forEach(typeBtn => {
+        // console.log("checking", deliveryMethodType)
+        typeBtn.addEventListener("click", () => {
+          // console.log("classList", typeBtn.classList)
+          if (!typeBtn.classList.contains("clicked")) {
+            typeBtn.classList.toggle("clicked")
+            deliveryMethodList[typeBtn.value] = true
+            if ("delivery" in deliveryMethodList) {
               document.getElementById("radius").style.display = "block";
+              let selectedDistance = document.getElementById("deliveryDistance").value
+              deliveryMethodList.kmRadius = selectedDistance
+            }
+            console.log("radius", deliveryMethodList)
+          } else {
+            typeBtn.classList.remove("clicked")
+            if (typeBtn.value in deliveryMethodList) {
+              delete deliveryMethodList[typeBtn.value]
+            }
+            if (!("delivery" in deliveryMethodList)) {
+              document.getElementById("radius").style.display = "none";
+              delete deliveryMethodList.kmRadius
             }
           }
-        }
+          console.log(deliveryMethodList)
+        })
       })
-    }
+
+    })
 
 
-    // document.getElementById('radius').style.pointerEvents = 'none';
-    //  document.getElementById("radius").style.display = "block"
-    // console.log(document.getElementById("radius"))
-
-    // var nodes = document.getElementById("radius").getElementsByTagName('*');
-    // for(var i = 0; i < nodes.length; i++){
-    //      nodes[i].disabled = true;
-    // }
-
-
-    // let deliveryMethodList = []
-    // document.addEventListener("DOMContentLoaded", () => {
-    //   // let deliveryMethodType = document.getElementsByClassName("delivery_pickUp").querySelectorAll(".deliveryBtn")
-    //   let deliveryMethodType = document.querySelector(".delivery_pickUp").children
-    //   // console.log("pppp",document.querySelector(".delivery_pickUp").children)
-    //   for (let typeBtn of deliveryMethodType) {
-    //     typeBtn.addEventListener("click", () => {
-    //       // console.log("classList",typeBtn.classList)
-    //       //if the product type btn  was chosen before
-    //       if (typeBtn.classList.contains("clicked")) {
-    //         typeBtn.classList.remove("clicked")
-    //         let index = deliveryMethodList.indexOf(typeBtn.value);
-    //         if (index !== -1) {
-    //           deliveryMethodList.splice(index, 1);
-    //           // console.log("no", deliveryMethodList)
-    //         }
-    //         //if product type was not clicked before
-    //       } else {
-    //         typeBtn.classList.add("clicked")
-    //         deliveryMethodList.push(typeBtn.value)
-    //         if (deliveryMethodList.includes("delivery")) {
-    //           document.getElementById("radius").style.display = "block";
-    //         }
-    //         // console.log("yes", deliveryMethodList)
-    //       }
-    //     })
-    //   }
-    // })
-
-
-    //pick one of the radius,selectedDistance will be the value of selected radius.
-
-    let selectedDistance = 10;
-
-    function selectedRadius() {
-      selectedDistance = document.getElementById("deliveryDistance").value
-
-      console.log(selectedDistance)
-    }
-
-    // if(deliveryMethodList && )
-
-
-
-
-
-    let finishUpButton = document.body.querySelector(".yellow-bn");
-
-    finishUpButton.onclick = function () {
-      location.href = "shop_setUp_6";
-    } 
+    submitDeliveryMethodBtn.addEventListener("click", () => {
+      if (Object.keys(deliveryMethodList).length !== 0) {
+        console.log(deliveryMethodList)
+        axios.post('/shop_setup/delivery_type', { deliveryMethodList })
+          .then(response => {
+            console.log(`${response.data} is sent back from backend!!`)
+          })
+          .catch(error => {
+            console.log(error);
+          })
+      }
+    })
   </script>
 </body>
-
 </html>
+
+
+
+<!--  get the delvery selected value array. have replace this with the object above.
+  let deliveryMethodList = []
+
+document.addEventListener("DOMContentLoaded", () => {
+  let deliveryMethodType = document.querySelectorAll(".deliveryBtn")
+  deliveryMethodType.forEach(typeBtn => {
+    // console.log("checking", deliveryMethodType)
+    typeBtn.addEventListener("click", () => {
+      // console.log("classList", typeBtn.classList)
+      if (!typeBtn.classList.contains("clicked")) {
+        typeBtn.classList.toggle("clicked")
+        deliveryMethodList.push(typeBtn.value)
+        if (deliveryMethodList.includes("delivery")) {
+          document.getElementById("radius").style.display = "block";
+        }
+        // console.log("yes", deliveryMethodList)
+      } else {
+        typeBtn.classList.remove("clicked")
+        let index = deliveryMethodList.indexOf(typeBtn.value);
+        if (index !== -1) {
+          deliveryMethodList.splice(index, 1);
+        }
+        if (!deliveryMethodList.includes("delivery")) {
+          document.getElementById("radius").style.display = "none";
+        }
+        // console.log("no", deliveryMethodList)
+      }
+      console.log("back", deliveryMethodList)
+
+      }
+
+
+    })
+  })
+
+}) -->
+
+
+<!-- Use an onclick funtion to get the value of the selected radius.
+pick one of the radius,selectedDistance will be the value of selected radius.
+
+function selectedRadius() {
+  let selectedDistance = document.getElementById("deliveryDistance").value
+  deliveryMethodList.kmRadius = selectedDistance
+  console.log(deliveryMethodList)
+}
+selectedRadius() -->

@@ -5,7 +5,6 @@ const path = require('path');
 const crypto = require('crypto')
 
 
-
 // Set The Storage Engine
 const storage = multer.diskStorage({
   destination: './public/uploads/',
@@ -14,6 +13,7 @@ const storage = multer.diskStorage({
     cb(null, bytes + path.extname(file.originalname));
   }
 });
+
 
 // Init Upload
 const upload = multer({
@@ -24,6 +24,7 @@ const upload = multer({
   }
 }).single('myImage');
 // can do .array() if you want to upload multiple images
+
 
 // Check File Type
 function checkFileType(file, cb) {
@@ -40,6 +41,7 @@ function checkFileType(file, cb) {
     cb('Error: Images Only!');
   }
 }
+
 
 // Init app
 const app = express();
