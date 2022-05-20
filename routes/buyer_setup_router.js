@@ -1,4 +1,5 @@
 /* libraries */
+const help = require("../help")
 const express = require("express");
 const multer = require('multer');
 const ejs = require('ejs');
@@ -27,14 +28,13 @@ app.use(express.json())
 
 
 
-router.get("/login_signup", async(req, res) => {
-
+router.get("/login_signup", async (req, res) => {
     res.render("buyer_setup/login_signup")
 })
 
 
 
-router.get("/buyer_login", async(req, res) => {
+router.get("/buyer_login", async (req, res) => {
     res.render("buyer_setup/buyer_login", {
     })
 })
@@ -45,28 +45,20 @@ router.get("/buyer_login", async(req, res) => {
 router.post("/buyer_login", async (req, res) => {
     let email = req.body.buyer_email;
     let password = req.body.buyer_password;
-
     let buyer = await mysqlDB.authenticateBuyer(email, password)
-    console.log(buyer)
     if (buyer.length === 0) {
         res.redirect("/buyer_setup/buyer_login")
         return
     }
     const id = buyer[0].buyer_id
-    console.log(id)
-    req.session.id = id;
-    req.session.email = email;
+    req.session.buyer = {
+        buyer_id: id,
+        buyer_email: email
+    }
+
     // let store_email = req.session.store_email ? req.session.store_email : null;
-
-
-
-
     res.redirect("/follow_business/follow_business_1")
 })
-
-
-
-
 
 
 

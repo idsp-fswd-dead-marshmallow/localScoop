@@ -8,6 +8,7 @@ const dbConnection = require("./database/databaseConnection.js")
 // const mysqlDB = require("./database/databaseAccessLayer.js")
 const ejs = require("ejs")
 const s3 = require("./s3")
+var nodemailer = require('nodemailer');
 
 
 // import cookieSession from "cookie-session"
@@ -19,10 +20,6 @@ const s3 = require("./s3")
 const multer = require("multer")
 const path = require("path")
 const crypto = require("crypto")
-
-// import multer from 'multer'
-// import path from 'path'
-// import crypto from 'crypto';
 
 
 // fake-database
@@ -41,11 +38,14 @@ const addCartRouter = require("./routes/add_cart_router")
 const shoppingCartRouter = require("./routes/shopping_cart_router")
 const followBusinessRouter = require("./routes/follow_business_router")
 const buyerSetupRouter = require("./routes/buyer_setup_router")
+const chatRouter = require("./routes/chat_router")
+const checkoutRouter = require("./routes/checkout_router")
+const req = require("express/lib/request")
+const analyticsRouter = require("./routes/analytics_router")
+
+
 
 // const sellerHomeRouter = require("./routes/seller_home_router")
-
-
-const PORT = process.env.PORT || 8000; // let express set port, else make it 8000
 
 /*** express ***/
 const app = express();
@@ -75,6 +75,9 @@ app.use("/add_cart", addCartRouter)
 app.use("/shopping_cart", shoppingCartRouter)
 app.use("/follow_business", followBusinessRouter)
 app.use("/buyer_setup", buyerSetupRouter)
+app.use("/chat", chatRouter)
+app.use("/checkout", checkoutRouter)
+app.use("/analytics", analyticsRouter)
 
 
 
@@ -86,18 +89,39 @@ function authorized(req, res, next) {
   next()
 }
 
+//=======session:
+// set the session:
+// req.session.id = id
+
+// get the session:
+// let id = req.session.id
+
+// req.session.buyer = {
+//   buyer_id: id,        
+//   buyer_email:email
+
+// }
+
+// req.session.seller = {
+//   seller_id: id,
+//   seller_email: email
+// }
+
+// req.session.seller_info.email = email
+//=======session:
+
+
+
 /* ROUTES */
-app.get("/a", (req, res) => {
 
-})
+//
 
 
- 
+
 app.get("/", (req, res) => {
-  let email = req.session.email
-  let id = req.session.id
-
-  res.render("index",{email,id})
+  let sellerSession = req.session.seller
+  let buyerSession = req.session.buyer
+  res.render("index",{sellerSession,buyerSession})
 })
 
 app.get("/index2", (req, res) => {
@@ -110,10 +134,6 @@ app.get("/dcs", (req, res) => {
   res.redirect("/");
 })
 
-// test 
-app.get("/t", (req, res) => {
-  res.send('exist')
-})
 
 
 // for s3 photo upload. Is an ajax route
@@ -175,6 +195,35 @@ function checkFileType(file, cb) {
 //     file: `uploads/${req.file.filename}`
 //   });
 // });
+
+
+// var transporter = nodemailer.createTransport({
+//   service: 'gmail',
+//   auth: {
+//     user: process.env.MY_EMAIL,
+//     pass: process.env.MY_PASS
+//   }
+// });
+
+// var mailOptions = {
+//   from: process.env.MY_EMAIL,
+//   to: 'yoyochen68@yahoo.ca',
+//   subject: 'Sending Email using Node.js',
+//   text: 'That was easy!'
+// };
+
+// transporter.sendMail(mailOptions, function(error, info){
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log('Email sent: ' + info.response);
+//   }
+// });
+
+
+
+
+
 
 module.exports = app;
 

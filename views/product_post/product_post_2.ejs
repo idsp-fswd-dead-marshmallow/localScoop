@@ -8,25 +8,34 @@
     <title>Document</title>
 
     <%- include('../elements/seller_footer.ejs', {page:"page_landing"}) %>
-    <link rel="stylesheet" href="../../styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
+        <link rel="stylesheet" href="../../styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <style>
+            img {
+                height: 200px;
+                width: 250px;
+                border-radius: 15px;
+                object-fit: contain;
+            }
+        </style>
 </head>
 
 <body>
     <div class="center">
         <div class="centerBox productSummary">
             <h2>Your Product is Live!</h2>
-            <p>Your “Nike Sage Low” product listing has been succesfully posted to your business page.</p>
+            <p>Your <b>
+                    <%= productInfo.productName %>
+                </b> product listing has been succesfully posted to your business page.</p>
             <button type=" button" class="yellow-bn m-bn">Go to listing</button>
         </div>
-        
-        <div class="productList">New listing:</div>
+        <a href="/orders/orders_1">
+            <div class="productList">New listing:</div>
+        </a>
 
         <div class="imgAndProductInfo">
             <% if(productInfo){ %>
-                <!-- <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="" style="border-radius: 10px;"> -->
-                <img src="<%= productInfo.imgUrl %>" alt="" style="border-radius: 10px;">
+                <img src="<%= productInfo.imageFilePath %>" alt="">
                 <div class="productInfo">
                     <div>Product Name : <%= productInfo.productName %>
                     </div>
@@ -40,11 +49,8 @@
                     </div>
                     <% } %>
                 </div>
-
         </div>
-
     </div>
-   
     <footer>
         <%- include('../elements/seller_footer',{page:"product_post"}) %>
     </footer>

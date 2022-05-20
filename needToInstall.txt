@@ -1,0 +1,5 @@
+1.for auto send email after submiting order
+npm install nodemailer
+
+2.
+npm install --save luxon ?

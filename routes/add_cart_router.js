@@ -1,57 +1,77 @@
 /* libraries */
+const help = require("../help")
 const express = require("express");
 const multer = require('multer');
 const ejs = require('ejs');
 const path = require('path');
 const crypto = require('crypto')
-const db = require("../fake-db");
 const router = express.Router();
 const mysqlDB = require('../database/databaseAccessLayer')
 
 
 
-router.get("/a", (req, res) => {
-  res.redirect("/add_cart/add_cart")
+//all products
+router.get("/products", help.buyerAuthorized, async (req, res) => {
+
+  // let buyer_id = 1
+  let buyer_id = req.session.buyer.buyer_id
+  let searchString = null
+
+  //make it based on ast added later
+  let productInfo = await mysqlDB.getRandomProducts()
+  let cartItemsTotal =  await mysqlDB.getCartItemsCount(buyer_id)
+
+  res.render("add_cart/products", {productInfo:productInfo, cartItemsTotal:cartItemsTotal, searchString })
+
 })
 
-// GET /add_cart/add_cart
-router.get("/add_cart/:id", async(req, res) => {
+//all products
 
+
+  router.post("/products", help.buyerAuthorized, async (req, res) => {
+    // let buyer_id = 1
+    let buyer_id = req.session.buyer.buyer_id
+    let searchString = req.body.search
+
+    let productInfo = await mysqlDB.searchProduct(searchString)
+    let cartItemsTotal = await mysqlDB.getCartItemsCount(buyer_id)
+
+  res.render("add_cart/products", {productInfo, cartItemsTotal,searchString })
+
+})
+
+
+
+// single product
+// GET /add_cart/add_cart/id
+router.get("/add_cart/:id",help.buyerAuthorized, async(req, res) => {
   let product_id = req.params.id
-  let buyer_id = req.session.id
+  // let buyer_id = 1
+  let buyer_id = req.session.buyer.buyer_id
 
-
-  let cardItemsTotal = await mysqlDB.getCartItemsLength(buyer_id)
   let productInfo = await mysqlDB.getProductsAndImages(product_id)
   let storeInfo = await mysqlDB.getStoreInfoByStoreId(productInfo[0].store_id)
+  let cartItemsTotal =  await mysqlDB.getCartItemsCount(buyer_id)
 
 
-res.send(product_id)
-  // res.render("add_cart/add_cart", {productInfo: productInfo[0], storeInfo:storeInfo[0], cardItemsTotal})
-
-  // console.log(productInfo)
-
-  res.render("add_cart/add_cart", {productInfo: productInfo[0], storeInfo:storeInfo[0], cardItemsTotal})
-
+  res.render("add_cart/add_cart", {productInfo: productInfo[0], storeInfo:storeInfo[0], cartItemsTotal:cartItemsTotal})
 })
 
 
 
 
-router.post("/add_cart",  async (req, res) => {
 
-  /////I NEED HE PRODUCT ID SOMEHOW FROM LAST PAGE
-  // let product_id = ""
-  let product_id = 2
-  let buyer_id = 1
 
+// ajax request destination
+router.post("/add_cart/:id", help.buyerAuthorized,  async (req, res) => {
+
+  let product_id = req.params.id
+  let buyer_id = req.session.buyer.buyer_id
   await mysqlDB.addToCart(buyer_id, product_id)
-  let cartItemsTotal =  await mysqlDB.getCartItemsLength(buyer_id)
-console.log("checking",cartItemsTotal)
-  res.json( {quantity: cartItemsTotal })
-  // return  await mysqlDB.getCartItemsLength(buyer_id)
+  let cartItemsTotal =  await mysqlDB.getCartItemsCount(buyer_id)
+   res.json( {quantity: cartItemsTotal })
+ })
 
-})
 
 
 module.exports = router;
