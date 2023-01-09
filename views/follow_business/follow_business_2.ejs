@@ -7,6 +7,8 @@
     <%- include('../elements/seller_footer.ejs', {page:"page_landing"}) %>
     <link rel="stylesheet" href="../../styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="icon" type="image/x-icon" href="/logo/localscooplogo2.png">
+
 
     <title>Sellers shop</title>
 
@@ -26,7 +28,19 @@
         </div>
 
         <div class="nav-wrapper--right buyer">
-            <a href="#"><span class="material-icons nav-icon seller-shop">share</span></a>
+            <div>
+                <a href="/chat/buyer"><span class="material-icons white-text nav-icon buyer">mode_comment</span></a>
+            </div>
+            <div class="bag">
+                <a href="/shopping_cart/shopping_cart">
+                    <% if(cartQuantity !==0 && cartQuantity !==null ){ %>
+                        <div class="dot">
+                            <%= cartQuantity %>
+                        </div>
+                    <% } %>
+                    <span class="material-icons nav-icon buyer nav-icon"> shopping_cart </span>
+                </a>
+            </div>
 
         </div>
 
@@ -82,12 +96,14 @@
     <div class="seller_grid">
 
         <% productInfo.forEach(product => { %>
+        <a href="/add_cart/add_cart/<%= product.product_id%>">
+
         <div class="seller_grid_item">
             <img alt="" class="seller_grid_image" src="<%=product.image_file_paths %>">
             <p><%=product.image_file_paths %></p>
         </div>
         <%  }); %>
-
+        </a>
     </div>
 
 
@@ -97,7 +113,7 @@
 
 
     <footer>
-        <%- include('../elements/buyer_footer',{page:"product_post"}) %>
+        <%- include('../elements/buyer_footer', {page:"follow_business"}) %>
     </footer>
 
 </main>
@@ -113,9 +129,6 @@
             .then(response => {
                 // document.body.style.backgroundColor = "red";
                 // console.log(response.data)
-
-
-
                 console.log(response.data.quantity)
                 // document.querySelector(".followers-number").value = response.data.quantity
                 // console.log(cartItemsTotal, "the item has been added to the bag ")
